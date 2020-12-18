@@ -1,0 +1,26 @@
+{
+  "name": "web-projects-api",
+  "version": "1.0.0",
+  "description": "Api of UD, website that will be focused on sharing knowledge, mainly about technology and a design system.",
+  "main": "./api/index.js",
+  "scripts": {
+    "dev": "nodemon ./api/index.js -L",
+    "start": "node ./api/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ulisessg/web-projects-api.git"
+  },
+  "author": "UlisesSG <ukisessg@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ulisessg/web-projects-api/issues"
+  },
+  "homepage": "https://github.com/Ulisessg/web-projects-api#readme",
+  "devDependencies": {
+    "nodemon": "2.0.6"
+  },
+  "dependencies": {
+    "express": "4.17.1"
+  }
+}

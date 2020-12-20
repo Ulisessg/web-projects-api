@@ -1,9 +1,11 @@
 import express from 'express';
 import { port } from '../config.js';
+import { error, success } from '../network/responses.js';
+
 const app = express();
 
 app.use('/', async (req, res) => {
-  res.send('Work');
+  success(req, res, 200);
 });
 
 app.listen(port, () => {

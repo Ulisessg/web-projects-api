@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "web-projects-api",
   "version": "1.0.0",
   "description": "Api of UD, website that will be focused on sharing knowledge, mainly about technology and a design system.",

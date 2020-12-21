@@ -1,58 +1,33 @@
-const mockData = {
+//@ts-check
+const mock = {
   blogs: [
-    { id: 1, data: 'SAMPLE TEXT' },
-    { id: 2, data: 'SAMPLE TEXT' },
+    { number: 0 },
+    { number: 1 },
+    { number: 2 },
+    { number: 3 },
+    { number: 4 },
   ],
 };
 
-function getBlog(subject, title, id) {
-  const blog = mockData.blogs.filter((blog) => {
-    return blog.id === id;
-  });
-
-  return blog[0];
+function findOne(collection, query) {
+  return mock.blogs[0];
 }
 
-function getBlogs(initialNumber = 0, limit = 9) {
-  return mockData.blogs;
+function findMany(collection, query) {
+  return mock.blogs[1];
 }
 
-function getBlogsBySubject(subject, initialNumber, limit) {
-  return mockData.blogs;
-}
-
-function createBlog({
-  name,
-  metaDescription,
-  metaSubjects,
-  seoCardUrl,
-  content,
-}) {
-  const blog = {
-    name,
-    metaDescription,
-    metaSubjects,
-    seoCardUrl,
-    content,
-  };
-
-  mockData.blogs.push(blog);
+function insertOne(collection, document) {
+  mock.blogs.push(document);
   return true;
 }
 
-function updateBlog({ _id, content }) {
-  mockData.blogs.push({ _id, content });
+function updateOne(collection, id, document) {
+  return mock.blogs[3];
 }
 
-function deleteBlog(_id) {
+function deleteOne(collection, id) {
   return true;
 }
 
-export {
-  getBlog,
-  getBlogs,
-  getBlogsBySubject,
-  createBlog,
-  updateBlog,
-  deleteBlog,
-};
+export { findOne, findMany, insertOne, updateOne, deleteOne };

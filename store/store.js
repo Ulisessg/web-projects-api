@@ -30,4 +30,4 @@ function deleteOne(collection, id) {
   return true;
 }
 
-export { findOne, findMany, insertOne, updateOne, deleteOne };
+export default { findOne, findMany, insertOne, updateOne, deleteOne };

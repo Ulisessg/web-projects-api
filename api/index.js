@@ -1,14 +1,16 @@
+//@ts-check
 import express from 'express';
 import { port } from '../config.js';
-import { error, success } from '../network/responses.js';
+import blog from './components/blog/network.js';
 
 const app = express();
+
+//Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/', async (req, res) => {
-  success(req, res, 200);
-});
+//Routes
+app.use('/api/blog', blog);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

@@ -1,3 +1,5 @@
+import { Schema, model } from 'mongoose';
+
 const getBlog = {
   id: Number,
   name: String,
@@ -19,14 +21,30 @@ const getBlogs = [
   },
 ];
 
-const createBlog = {
-  id: Number,
-  name: String,
-  metaDescription: String,
-  metaSubjects: Array,
-  seoCardUrl: String,
-  content: String,
-};
+const createBlogSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  metaDescription: {
+    type: String,
+    required: true,
+  },
+  metaSubjects: {
+    type: Array,
+    required: true,
+  },
+  seoCardUrl: {
+    type: String,
+    required: true,
+  },
+  content: {
+    type: String,
+    required: true,
+  },
+});
+
+export const createBlog = model('blogs', createBlogSchema);
 
 const updateBlog = {
   id: Number,

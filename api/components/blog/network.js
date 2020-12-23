@@ -10,8 +10,15 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const response = controller.createBlog('');
-  success(req, res, 201, response);
+  controller
+    .createBlog(req.body)
+    .then((response) => {
+      success(req, res, 201, response);
+    })
+    .catch((err) => {
+      error(req, res, 500, 'Error creating blog');
+      console.error(err);
+    });
 });
 
 export default router;

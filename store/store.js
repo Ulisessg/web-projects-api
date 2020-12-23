@@ -3,6 +3,7 @@ import db from 'mongoose';
 
 db.Promise = global.Promise;
 
+//DB connection
 const uri = process.env.URI;
 
 db.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -13,6 +14,7 @@ db.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     console.error(err);
   });
 
+//CRUD
 function findOne(collection, query) {
   return;
 }
@@ -21,8 +23,14 @@ function findMany(collection, query) {
   return;
 }
 
-function insertOne(collection, document) {
-  return true;
+async function insertOne(document) {
+  try {
+    await document.save();
+    return 'Blog created';
+  } catch (error) {
+    console.error(error);
+    return 'Error creating blog';
+  }
 }
 
 function updateOne(collection, id, document) {

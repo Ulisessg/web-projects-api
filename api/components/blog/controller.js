@@ -1,3 +1,4 @@
+import CreateBlogSchema from '../../schemas/CreateBlog.js';
 const COLLECTION = 'blogs';
 
 export default (injectedStore) => {
@@ -10,8 +11,14 @@ export default (injectedStore) => {
     store.findOne(COLLECTION);
   }
 
-  function createBlog(content) {
-    store.insertOne(COLLECTION);
+  async function createBlog(data) {
+    try {
+      const document = new CreateBlogSchema(data);
+      const response = store.insertOne(document);
+      return response;
+    } catch (error) {
+      return error;
+    }
   }
 
   return { getBlog, createBlog };

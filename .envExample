@@ -1,2 +1,2 @@
 PORT=
-URI=mongodb+srv://<username>:<password>@sandbox.7cw9f.mongodb.net/<dbname>?retryWrites=true&w=majority
+URI=

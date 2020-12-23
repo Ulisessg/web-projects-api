@@ -1,29 +1,32 @@
 //@ts-check
-const mock = {
-  blogs: [
-    { number: 0 },
-    { number: 1 },
-    { number: 2 },
-    { number: 3 },
-    { number: 4 },
-  ],
-};
+import db from 'mongoose';
+
+db.Promise = global.Promise;
+
+const uri = process.env.URI;
+
+db.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('[DB] connected');
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 function findOne(collection, query) {
-  return mock.blogs[0];
+  return;
 }
 
 function findMany(collection, query) {
-  return mock.blogs[1];
+  return;
 }
 
 function insertOne(collection, document) {
-  mock.blogs.push(document);
   return true;
 }
 
 function updateOne(collection, id, document) {
-  return mock.blogs[3];
+  return;
 }
 
 function deleteOne(collection, id) {

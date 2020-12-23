@@ -1,7 +1,6 @@
 //@ts-check
 //ENV
-import { config } from 'dotenv';
-config();
+import {} from 'dotenv/config.js';
 
 //Dependencies
 import express from 'express';

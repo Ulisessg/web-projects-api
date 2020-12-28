@@ -30,18 +30,25 @@ router.get('/', async (req, res) => {
 
 const whiteList = process.env.REMOTE_IP;
 
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (origin === whiteList) {
-      callback(null, true);
-    } else {
-      callback('Not allowed by cors');
-    }
-  },
-};
+let corsOptions;
+
+if (process.env.NODE_ENV === 'production') {
+  corsOptions = {
+    origin: function (origin, callback) {
+      if (origin === whiteList) {
+        callback(null, true);
+      } else {
+        callback('Not allowed by cors');
+      }
+    },
+  };
+} else {
+  corsOptions = null;
+}
+
+console.log(corsOptions);
 
 router.post('/', cors(corsOptions), async (req, res) => {
-  console.log(req.headers);
   controller
     .createBlog(req.body)
     .then((response) => {

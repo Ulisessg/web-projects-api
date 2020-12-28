@@ -5,8 +5,8 @@
   "description": "Api of UD, website that will be focused on sharing knowledge, mainly about technology and a design system.",
   "main": "./api/index.js",
   "scripts": {
-    "dev": "nodemon ./api/index.js -L",
-    "start": "node ./api/index.js"
+    "dev": "NODE_ENV=development nodemon ./api/index.js -L",
+    "start": "NODE_ENV=production node ./api/index.js"
   },
   "repository": {
     "type": "git",

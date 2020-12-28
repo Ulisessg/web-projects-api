@@ -2,7 +2,10 @@ import { Router } from 'express';
 import { success, error } from '../../../network/responses.js';
 import controller from './index.js';
 
+import cors from 'cors';
+
 const router = Router();
+//router.use(cors());
 
 router.get('/', async (req, res) => {
   const query = {
@@ -25,7 +28,20 @@ router.get('/', async (req, res) => {
     });
 });
 
-router.post('/', async (req, res) => {
+const whiteList = process.env.REMOTE_IP;
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (origin === whiteList) {
+      callback(null, true);
+    } else {
+      callback('Not allowed by cors');
+    }
+  },
+};
+
+router.post('/', cors(corsOptions), async (req, res) => {
+  console.log(req.headers);
   controller
     .createBlog(req.body)
     .then((response) => {

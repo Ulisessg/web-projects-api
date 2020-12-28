@@ -1,19 +1,24 @@
-import CreateBlogSchema from '../../schemas/CreateBlog.js';
-const COLLECTION = 'blogs';
+//@ts-check
+import BlogSchema from '../../schemas/BlogSchema.js';
 
 export default (injectedStore) => {
   let store = injectedStore;
   if (!store) {
     store = import('../../../store/store.js');
   }
+  async function getBlog(query) {
+    try {
+      const result = await store.findOne(BlogSchema, query);
 
-  function getBlog(id) {
-    store.findOne(COLLECTION);
+      return result;
+    } catch (error) {
+      return error;
+    }
   }
 
   async function createBlog(data) {
     try {
-      const document = new CreateBlogSchema(data);
+      const document = new BlogSchema(data);
       const response = store.insertOne(document);
       return response;
     } catch (error) {
@@ -21,5 +26,5 @@ export default (injectedStore) => {
     }
   }
 
-  return { getBlog, createBlog };
+  return { createBlog, getBlog };
 };

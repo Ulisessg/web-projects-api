@@ -15,11 +15,17 @@ db.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   });
 
 //CRUD
-function findOne(collection, query) {
-  return;
+async function findOne(schema, query) {
+  try {
+    //Doesn't matter if the result is empty, network check if !result
+    const result = await schema.findOne(query);
+    return result;
+  } catch (error) {
+    return error;
+  }
 }
 
-function findMany(collection, query) {
+function findMany(schema, query) {
   return;
 }
 
@@ -33,7 +39,7 @@ async function insertOne(document) {
   }
 }
 
-function updateOne(collection, id, document) {
+function updateOne(schema, document) {
   return;
 }
 

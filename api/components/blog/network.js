@@ -5,8 +5,24 @@ import controller from './index.js';
 const router = Router();
 
 router.get('/', async (req, res) => {
-  const result = controller.getBlog(1);
-  success(req, res, 200, result);
+  const query = {
+    name: req.query.name,
+  };
+
+  controller
+    .getBlog(query)
+    .then((result) => {
+      //Check if the query returns null
+      if (!result) {
+        error(req, res, 404, 'Blog not found');
+      } else {
+        success(req, res, 200, result);
+      }
+    })
+    .catch((err) => {
+      //Get MongoDB problems
+      error(req, res, 500, 'Internal Server Error', err);
+    });
 });
 
 router.post('/', async (req, res) => {

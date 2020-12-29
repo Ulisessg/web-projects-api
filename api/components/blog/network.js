@@ -49,15 +49,25 @@ if (process.env.NODE_ENV === 'production') {
 console.log(corsOptions);
 
 router.post('/', cors(corsOptions), async (req, res) => {
-  controller
-    .createBlog(req.body)
-    .then((response) => {
-      success(req, res, 201, response);
-    })
-    .catch((err) => {
-      error(req, res, 500, 'Error creating blog');
-      console.error(err);
-    });
+  if (process.env.NODE_ENV === 'production') {
+    error(
+      req,
+      res,
+      401,
+      'You are not allwed for this',
+      'Testing this in production',
+    );
+  } else {
+    controller
+      .createBlog(req.body)
+      .then((response) => {
+        success(req, res, 201, response);
+      })
+      .catch((err) => {
+        error(req, res, 500, 'Error creating blog');
+        console.error(err);
+      });
+  }
 });
 
 export default router;

@@ -1,11 +1,10 @@
-import express from 'express';
-import { error, success } from '../../../network/responses.js';
-import controller from './index.js';
+const express = require('express');
+const { error, success } = require('../../../network/responses.js');
+const controller = require('./index.js');
 
-import cors from 'cors';
+const cors = require('cors');
 
 const router = express.Router();
-//router.use(cors());
 
 router.get('/', async (req, res) => {
   const query = {
@@ -48,7 +47,7 @@ if (process.env.NODE_ENV === 'production') {
 
 console.log(corsOptions);
 
-router.post('/', cors(corsOptions), async (req, res) => {
+router.post('/', async (req, res) => {
   if (process.env.NODE_ENV === 'production') {
     error(
       req,
@@ -70,4 +69,4 @@ router.post('/', cors(corsOptions), async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

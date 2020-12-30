@@ -1,7 +1,7 @@
 //@ts-check
-import BlogSchema from '../../schemas/BlogSchema.js';
+const BlogSchema = require('../../schemas/BlogSchema.js');
 
-export default (injectedStore) => {
+module.exports = (injectedStore) => {
   let store = injectedStore;
   if (!store) {
     store = import('../../../store/store.js');

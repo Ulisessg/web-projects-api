@@ -1,10 +1,9 @@
-//@ts-check
 //ENV
-import {} from 'dotenv/config.js';
+require('dotenv').config();
 
 //Dependencies
-import express from 'express';
-import blog from './components/blog/network.js';
+const express = require('express');
+const blog = require('./components/blog/network.js');
 
 const app = express();
 const PORT = process.env.PORT || 3000;

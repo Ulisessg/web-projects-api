@@ -47,4 +47,4 @@ function deleteOne(collection, id) {
   return true;
 }
 
-export default { findOne, findMany, insertOne, updateOne, deleteOne };
+module.exports = { findOne, findMany, insertOne, updateOne, deleteOne };

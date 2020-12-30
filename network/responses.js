@@ -22,4 +22,4 @@ function error(
   });
 }
 
-export { success, error };
+module.exports = { success, error };

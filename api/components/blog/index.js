@@ -1,5 +1,4 @@
-//@ts-check
-import ctr from './controller.js';
-import store from '../../../store/store.js';
+const ctr = require('./controller.js');
+const store = require('../../../store/store.js');
 
-export default ctr(store);
+module.exports = ctr(store);

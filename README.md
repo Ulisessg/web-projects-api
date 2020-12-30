@@ -14,7 +14,7 @@ Clone the repository
 
 - ### [MongoDB](https://university.mongodb.com/)
 - ### [Express](https://expressjs.com/es/)
-- ### [Heroku](https://www.heroku.com/)
+- ### [Vercel](https://vercel.com/)
 
 ## Deploy 🚀
 

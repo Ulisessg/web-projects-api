@@ -1,5 +1,5 @@
 function success(req, res, statusCode = 200, message = 'Success') {
-  res.status(statusCode).send({
+  res.status(statusCode).json({
     error: false,
     message,
   });
@@ -12,7 +12,7 @@ function error(
   userMessage = 'Internal Server Error',
   adminMessage = 'Tell me where is the error',
 ) {
-  res.status(statusCode).send({
+  res.status(statusCode).json({
     error: true,
     message: userMessage,
   });

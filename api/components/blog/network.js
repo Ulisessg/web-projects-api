@@ -1,10 +1,10 @@
-import { Router } from 'express';
-import { success, error } from '../../../network/responses.js';
+import express from 'express';
+import { error, success } from '../../../network/responses.js';
 import controller from './index.js';
 
 import cors from 'cors';
 
-const router = Router();
+const router = express.Router();
 //router.use(cors());
 
 router.get('/', async (req, res) => {

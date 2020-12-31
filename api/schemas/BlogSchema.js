@@ -5,18 +5,6 @@ const CreateBlogSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  metaDescription: {
-    type: String,
-    required: true,
-  },
-  metaSubjects: {
-    type: Array,
-    required: true,
-  },
-  seoCardUrl: {
-    type: String,
-    required: true,
-  },
   content: {
     type: String,
     required: true,

@@ -1,5 +1,5 @@
 //@ts-check
-import db from 'mongoose';
+const db = require('mongoose');
 
 db.Promise = global.Promise;
 

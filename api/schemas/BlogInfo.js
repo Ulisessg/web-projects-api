@@ -7,6 +7,10 @@ const BlogInfoSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  title: {
+    type: String,
+    required: true,
+  },
   metaDescription: {
     type: String,
   },
@@ -20,4 +24,4 @@ const BlogInfoSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('blog-info', BlogInfoSchema);
+module.exports = mongoose.model('blogs-meta', BlogInfoSchema);

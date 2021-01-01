@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
       'Testing this in production',
     );
   }
-  /*controller
+  controller
     .createBlog(req.body)
     .then((response) => {
       success(req, res, 201, response);
@@ -45,7 +45,7 @@ router.post('/', async (req, res) => {
     .catch((err) => {
       error(req, res, 500, 'Error creating blog');
       console.error(err);
-    }); */
+    });
 });
 
 module.exports = router;

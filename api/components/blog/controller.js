@@ -1,5 +1,6 @@
 //@ts-check
 const BlogSchema = require('../../schemas/BlogSchema.js');
+const infoSchema = require('../../schemas/BlogInfo.js');
 
 module.exports = (injectedStore) => {
   let store = injectedStore;
@@ -18,9 +19,27 @@ module.exports = (injectedStore) => {
 
   async function createBlog(data) {
     try {
-      const document = new BlogSchema(data);
-      const response = store.insertOne(document);
-      return response;
+      const blog = {
+        name: data.name,
+        content: data.content,
+      };
+      const info = {
+        name: data.name,
+        title: data.title,
+        metaDescription: data.metaDescription,
+        metaSubjects: data.metaSubjects,
+        seoCardUrl: data.seoCardUrl,
+      };
+
+      const blogDocument = new BlogSchema(blog);
+      const infoDocument = new infoSchema(info);
+
+      const blogResponse = await store.insertOne(blogDocument);
+      const infoResponse = await store.insertOne(infoDocument);
+
+      if (!blogResponse && !infoDocument) return false;
+
+      return 'Blog created';
     } catch (error) {
       return error;
     }

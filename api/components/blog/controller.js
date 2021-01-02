@@ -47,7 +47,7 @@ module.exports = (injectedStore) => {
       const blogResponse = await store.insertOne(blogDocument);
       const infoResponse = await store.insertOne(infoDocument);
 
-      if (!blogResponse && !infoDocument) return false;
+      if (!blogResponse || !infoResponse) return false;
 
       return 'Blog created';
     } catch (error) {

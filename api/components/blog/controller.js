@@ -17,6 +17,16 @@ module.exports = (injectedStore) => {
     }
   }
 
+  async function getBlogInfo(query) {
+    try {
+      const result = await store.findOne(infoSchema, query);
+
+      return result;
+    } catch (error) {
+      return error;
+    }
+  }
+
   async function createBlog(data) {
     try {
       const blog = {
@@ -45,5 +55,5 @@ module.exports = (injectedStore) => {
     }
   }
 
-  return { createBlog, getBlog };
+  return { createBlog, getBlog, getBlogInfo };
 };

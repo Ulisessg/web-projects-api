@@ -25,7 +25,24 @@ router.get('/', async (req, res) => {
     });
 });
 
-console.log(process.env.NODE_ENV);
+router.get('/info', (req, res) => {
+  const query = {
+    name: req.query.name,
+  };
+
+  controller
+    .getBlogInfo(query)
+    .then((result) => {
+      if (!result) {
+        error(req, res, 404, 'Blog info not found');
+      } else {
+        success(req, res, 200, result);
+      }
+    })
+    .catch((err) => {
+      error(req, res, 500, 'Internal server error', err);
+    });
+});
 
 router.post('/', async (req, res) => {
   if (process.env.NODE_ENV === 'production') {

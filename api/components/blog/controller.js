@@ -17,6 +17,24 @@ module.exports = (injectedStore) => {
     }
   }
 
+  async function getAllBlogs() {
+    try {
+      const blogs = await store.findMany(BlogSchema);
+      return blogs;
+    } catch (err) {
+      return err;
+    }
+  }
+
+  async function getAllBlogsInfo() {
+    try {
+      const infos = await store.findMany(infoSchema);
+      return infos;
+    } catch (error) {
+      return error;
+    }
+  }
+
   async function getBlogInfo(query) {
     try {
       const result = await store.findOne(infoSchema, query);
@@ -55,5 +73,5 @@ module.exports = (injectedStore) => {
     }
   }
 
-  return { createBlog, getBlog, getBlogInfo };
+  return { createBlog, getBlog, getBlogInfo, getAllBlogs, getAllBlogsInfo };
 };

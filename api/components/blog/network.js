@@ -25,6 +25,42 @@ router.get('/', async (req, res) => {
     });
 });
 
+//get all info
+
+router.get('/all-blogs', async (req, res) => {
+  controller
+    .getAllBlogs()
+    .then((response) => {
+      if (!response) {
+        error(req, res, 404, 'Blogs not found');
+      }
+      success(req, res, 200, response);
+    })
+    .catch((message) => {
+      error(
+        req,
+        res,
+        500,
+        'Internal server error',
+        'Error en mongodb o la api',
+      );
+    });
+});
+
+router.get('/all-info', async (req, res) => {
+  controller
+    .getAllBlogsInfo()
+    .then((response) => {
+      if (!response) {
+        error(req, res, 404, 'Infos not found');
+      }
+      success(req, res, 200, response);
+    })
+    .catch((message) => {
+      error(req, res, 500, 'Internal server error', message);
+    });
+});
+
 router.get('/info', (req, res) => {
   const query = {
     name: req.query.name,

@@ -25,8 +25,13 @@ async function findOne(schema, query) {
   }
 }
 
-function findMany(schema, query) {
-  return;
+async function findMany(schema) {
+  try {
+    const result = await schema.find({});
+    return result;
+  } catch (err) {
+    return err;
+  }
 }
 
 async function insertOne(document) {

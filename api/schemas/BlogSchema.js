@@ -27,6 +27,10 @@ const CreateBlogSchema = new mongoose.Schema({
   visits: {
     type: Number,
     required: true
+  },
+  id: {
+    type: Number,
+    required: true
   }
 });
 

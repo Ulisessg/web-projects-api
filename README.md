@@ -32,83 +32,63 @@ Work in preogress
 
 # Schemas:
 
-## Blog: Object
-
-    Blog = {
-      name: String,
-      id: Number,
-      metaDescription: String,
-      metaSubjects: Array,
-      seoCardUrl: String,
-      content: String,
-      likes: Number,
-    }
-
-## getBlogs: Array[10]
-
-    getBlogs = [
-      {
-        blogUrl: String,
-        title: String,
-        subTitle: String,
-        cardUrl: String,
-        subjects: Array,
-        id: Number,
-      }
-    ]
-
 ## CreateBlog: Object
 
-    createBlog = {
-      _id: ObjectId(),
-      name: String,
-      metaDescription: String,
-      metaSubjects: Array,
-      seoCardUrl: String,
-      content: File.md,
+    CreateBlog = {
+        _id: ObjectId(),
+        name: {
+            type: String,
+            required: true,
+        },
+        content: {
+            type: String,
+            required: true,
+        },
     }
 
-## updateBlog: Object
+## Blog info: Object
 
-    updateBlog = {
-      _id: ObjectId(),
-      content: File.md
+    BlogInfo = {
+        name: {
+            type: String,
+            required: true,
+        },
+        title: {
+            type: String,
+            required: true,
+        },
+        metaDescription: {
+            type: String,
+        },
+        metaSubjects: {
+            type: Array,
+            required: true,
+        },
+        seoCardUrl: {
+            type: String,
+            required: true,
+        },
     }
 
-## deleteBlog: Object
-
-    deleteBlog = {
-      _id: ObjectId()
-    }
 
 # Endpoints
 
 ## Route
 
-    /api/getBlog => Blog: Object
+    Get a blog
 
-### Params: Subject, title, id
+    /api/blog?name=nameOfBlog
 
-## Route
 
-    /api/getBlogs => getBlogs: Array
-
-### Params: initNumber, limit
 
 ## Route
 
-    /api/getBlogsBySubject => getBlogs: Array
-
-### Params: Subject, initNumber, limitNumber
-
-## Route
-
-    /api/createBlog => createBlog: Object
+    Get all blogs
+    
+    /api/blog/all-blogs
 
 ## Route
 
-    /api/updateBlog => updateBlog; Object
-
-## Route
-
-    /api/deleteBlog => deleteBlog: Object
+    Get all blogs info
+    
+    /api/blog/all-info

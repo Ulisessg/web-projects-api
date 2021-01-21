@@ -93,11 +93,14 @@ router.post('/', async (req, res) => {
   controller
     .createBlog(req.body)
     .then((response) => {
-      success(req, res, 201, response);
+      if(response === 'Error creating blog'){
+        error(req, res, 500, response)
+      } else {
+        success(req, res, 201, response);
+      }
     })
     .catch((err) => {
       error(req, res, 500, 'Error creating blog');
-      console.error(err);
     });
 });
 

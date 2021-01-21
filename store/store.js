@@ -37,10 +37,10 @@ async function findMany(schema) {
 async function insertOne(document) {
   try {
     await document.save();
-    return 'Blog created';
+    return 'Document created';
   } catch (error) {
     console.error(error);
-    return 'Error creating blog';
+    return error;
   }
 }
 

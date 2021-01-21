@@ -1,6 +1,5 @@
 //@ts-check
 const BlogSchema = require('../../schemas/BlogSchema.js');
-const infoSchema = require('../../schemas/BlogInfo.js');
 
 module.exports = (injectedStore) => {
   let store = injectedStore;
@@ -28,7 +27,7 @@ module.exports = (injectedStore) => {
 
   async function getAllBlogsInfo() {
     try {
-      const infos = await store.findMany(infoSchema);
+      const infos = await store.findMany(BlogSchema);
       return infos;
     } catch (error) {
       return error;
@@ -37,7 +36,7 @@ module.exports = (injectedStore) => {
 
   async function getBlogInfo(query) {
     try {
-      const result = await store.findOne(infoSchema, query);
+      const result = await store.findOne(BlogSchema, query);
 
       return result;
     } catch (error) {
@@ -47,27 +46,32 @@ module.exports = (injectedStore) => {
 
   async function createBlog(data) {
     try {
+      // Get how many blog are, and set the id adding 1
+      const totalBlogs = await BlogSchema.countDocuments()
+
       const blog = {
         name: data.name,
         content: data.content,
-      };
-      const info = {
-        name: data.name,
         title: data.title,
         metaDescription: data.metaDescription,
         metaSubjects: data.metaSubjects,
         seoCardUrl: data.seoCardUrl,
+        // Visits setted to 0 by default
+        visits: 0,
+        id: totalBlogs + 1
       };
 
       const blogDocument = new BlogSchema(blog);
-      const infoDocument = new infoSchema(info);
 
       const blogResponse = await store.insertOne(blogDocument);
-      const infoResponse = await store.insertOne(infoDocument);
 
-      if (!blogResponse || !infoResponse) return false;
+      if(blogResponse !== 'Document created'){
+        return 'Error creating blog'
+      } else {
+        return 'Blog created';
+      }
+      
 
-      return 'Blog created';
     } catch (error) {
       return error;
     }

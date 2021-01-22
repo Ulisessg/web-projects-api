@@ -46,31 +46,6 @@ Work in preogress
         },
     }
 
-## Blog info: Object
-
-    BlogInfo = {
-        name: {
-            type: String,
-            required: true,
-        },
-        title: {
-            type: String,
-            required: true,
-        },
-        metaDescription: {
-            type: String,
-        },
-        metaSubjects: {
-            type: Array,
-            required: true,
-        },
-        seoCardUrl: {
-            type: String,
-            required: true,
-        },
-    }
-
-
 # Endpoints
 
 ## Route

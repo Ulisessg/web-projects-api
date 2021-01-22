@@ -32,10 +32,9 @@ Work in preogress
 
 # Schemas:
 
-## CreateBlog: Object
+## Blog Schema: JSON
 
-    CreateBlog = {
-        _id: ObjectId(),
+    {
         name: {
             type: String,
             required: true,
@@ -44,13 +43,38 @@ Work in preogress
             type: String,
             required: true,
         },
+        title: {
+            type: String,
+            required: true,
+        },
+        metaDescription: {
+            type: String,
+        },
+        metaSubjects: {
+            type: Array,
+            required: true,
+        },
+        seoCardUrl: {
+            type: String,
+            required: true,
+        },
+        visits: {
+            type: Number,
+            required: true
+        },
+        id: {
+            type: Number,
+            required: true
+        }
     }
 
 # Endpoints
 
 ## Route
 
-    Get a blog
+    Get a blog: Return a specific blog
+
+    Method: GET
 
     /api/blog?name=nameOfBlog
 
@@ -58,12 +82,80 @@ Work in preogress
 
 ## Route
 
-    Get all blogs
+    Get all blogs: Return all blogs
+
+    Method: GET
     
     /api/blog/all-blogs
 
 ## Route
 
-    Get all blogs info
+    Get all blogs info: Return info about blogs
+
+    Method: GET
     
     /api/blog/all-info
+
+## Route
+
+    Get info about one blog
+
+    Method: GET
+
+    /api/blog/info?name=NameOfBlog
+
+## Route
+
+    Get last 10 entries
+
+    Method: GET
+
+    /api/blog/last-entries
+
+    If you want to get less blogs:
+
+    /api/blog/last-entries?limit=Number
+
+## Route
+
+    // Create a blog, use Blog Schema
+
+    Method: POST
+
+    /api/blog
+
+    // Schema
+
+    {
+        name: {
+            type: String,
+            required: true,
+        },
+        content: {
+            type: String,
+            required: true,
+        },
+        title: {
+            type: String,
+            required: true,
+        },
+        metaDescription: {
+            type: String,
+        },
+        metaSubjects: {
+            type: Array,
+            required: true,
+        },
+        seoCardUrl: {
+            type: String,
+            required: true,
+        },
+        visits: {
+            type: Number,
+            required: true
+        },
+        id: {
+            type: Number,
+            required: true
+        }
+    }

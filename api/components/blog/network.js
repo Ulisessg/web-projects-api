@@ -5,6 +5,7 @@ const controller = require('./index.js');
 const router = express.Router();
 
 //  Get a blog
+
 router.get('/', async (req, res) => {
   const query = {
     name: req.query.name,
@@ -58,6 +59,8 @@ router.get('/all-blogs', async (req, res) => {
     });
 });
 
+//  Get all blogs info
+
 router.get('/all-info', async (req, res) => {
   let query;
 
@@ -82,6 +85,8 @@ router.get('/all-info', async (req, res) => {
     });
 });
 
+// Get info of a blog
+
 router.get('/info', (req, res) => {
   const query = {
     name: req.query.name,
@@ -101,6 +106,25 @@ router.get('/info', (req, res) => {
     });
 });
 
+//  Get last 10 entries
+
+router.get('/last-entries', async (req, res) => {
+  const limitSize = req.query.limit || 10
+  controller.findLastBlogs(req.body, limitSize)
+    .then((result) => {
+      if(result.length === 0 || result.ok === 0){
+        error(req, res, 404, 'Blogs not found', 'Check MongoDB status or limit value')
+      } else {
+        success(req, res, 200, result)
+      }
+    })
+    .catch((err) => {
+      error(req, res, 500, 'Internal server error', err)
+
+    })
+})
+
+// CreateBlog
 router.post('/', async (req, res) => {
   if (process.env.NODE_ENV === 'production') {
     error(

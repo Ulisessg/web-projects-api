@@ -77,5 +77,17 @@ module.exports = (injectedStore) => {
     }
   }
 
-  return { createBlog, getBlog, getBlogInfo, getAllBlogs, getAllBlogsInfo };
+  async function findLastBlogs (query, limit) {
+    const limitParsed = parseInt(limit)
+
+    try {
+      const result = await store.findLimitedDocuments(BlogSchema, query, {content: 0, name: 0, visits: 0}, limitParsed);
+
+      return result
+    } catch (error) {
+      return error
+    }
+  }
+
+  return { createBlog, getBlog, getBlogInfo, getAllBlogs, getAllBlogsInfo, findLastBlogs };
 };

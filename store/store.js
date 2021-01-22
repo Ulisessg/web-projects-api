@@ -23,9 +23,10 @@ async function findOne(schema, query) {
   }
 }
 
-async function findMany(schema, query) {
+async function findMany(schema, query, projection) {
   try {
-    const result  = schema.aggregate([{"$match": query}, {"$project": {_id: 0, __v: 0}}])
+    const proj = {...projection, _id: 0, __v: 0,}
+    const result  = await schema.aggregate([{"$match": query}, {"$project": proj}])
     return result;
   } catch (err) {
     return err;

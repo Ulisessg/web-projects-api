@@ -25,9 +25,9 @@ module.exports = (injectedStore) => {
     }
   }
 
-  async function getAllBlogsInfo() {
+  async function getAllBlogsInfo(query) {
     try {
-      const infos = await store.findMany(BlogSchema);
+      const infos = await store.findMany(BlogSchema, query, {content: 0, name: 0, visits: 0, id: 0});
       return infos;
     } catch (error) {
       return error;

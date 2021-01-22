@@ -4,6 +4,7 @@ const controller = require('./index.js');
 
 const router = express.Router();
 
+//  Get a blog
 router.get('/', async (req, res) => {
   const query = {
     name: req.query.name,
@@ -25,7 +26,7 @@ router.get('/', async (req, res) => {
     });
 });
 
-//get all info
+//  Get all blogs
 
 router.get('/all-blogs', async (req, res) => {
   let query;
@@ -58,8 +59,18 @@ router.get('/all-blogs', async (req, res) => {
 });
 
 router.get('/all-info', async (req, res) => {
+  let query;
+
+  const queryHasFields = Object.keys(req.body).length
+
+  if(queryHasFields === 0){
+    query = {}
+  } else {
+    query = req.body
+  }
+
   controller
-    .getAllBlogsInfo()
+    .getAllBlogsInfo(query)
     .then((response) => {
       if (!response) {
         error(req, res, 404, 'Infos not found');

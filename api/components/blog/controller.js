@@ -16,9 +16,9 @@ module.exports = (injectedStore) => {
     }
   }
 
-  async function getAllBlogs() {
+  async function getAllBlogs(query) {
     try {
-      const blogs = await store.findMany(BlogSchema);
+      const blogs = await store.findMany(BlogSchema, query);
       return blogs;
     } catch (err) {
       return err;

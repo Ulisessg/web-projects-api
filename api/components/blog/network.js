@@ -28,8 +28,18 @@ router.get('/', async (req, res) => {
 //get all info
 
 router.get('/all-blogs', async (req, res) => {
+  let query;
+
+  const queryHasFields = Object.keys(req.body).length
+
+  if(queryHasFields === 0){
+    query = {}
+  } else {
+    query = req.body
+  }
+
   controller
-    .getAllBlogs()
+    .getAllBlogs(query)
     .then((response) => {
       if (!response) {
         error(req, res, 404, 'Blogs not found');

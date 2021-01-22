@@ -1,8 +1,6 @@
 //@ts-check
 const db = require('mongoose');
 
-db.Promise = global.Promise;
-
 //DB connection
 const uri = process.env.URI;
 
@@ -25,9 +23,9 @@ async function findOne(schema, query) {
   }
 }
 
-async function findMany(schema) {
+async function findMany(schema, query) {
   try {
-    const result = await schema.find({});
+    const result  = schema.aggregate([{"$match": query}, {"$project": {_id: 0, __v: 0}}])
     return result;
   } catch (err) {
     return err;

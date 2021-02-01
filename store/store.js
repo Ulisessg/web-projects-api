@@ -43,8 +43,13 @@ async function insertOne(document) {
   }
 }
 
-function updateOne(schema, document) {
-  return;
+async function updateOne(schema, query, data) {
+  try {
+    const response = await schema.updateOne(query, data)
+    return response
+  } catch (error) {
+    return error
+  }
 }
 
 function deleteOne(collection, id) {

@@ -149,4 +149,17 @@ router.post('/', async (req, res) => {
     });
 });
 
+router.post('/add-visit', async (req, res) => {
+  const { blog_name } = req.body
+  controller.add_visit(blog_name).then((response) => {
+    if (response.error === true){
+      error(req,res, 500, 'Internal server error')
+    }else {
+      success(req, res, 201, response)
+    }
+  }).catch(() => {
+    error(req, res, 500, 'Internal server error')
+  })
+})
+
 module.exports = router;

@@ -89,5 +89,18 @@ module.exports = (injectedStore) => {
     }
   }
 
-  return { createBlog, getBlog, getBlogInfo, getAllBlogs, getAllBlogsInfo, findLastBlogs };
+  async function add_visit(blog_name) {
+    try {
+      let response = await store.updateOne(BlogSchema, {name: blog_name}, {"$inc": {"visits": 1}} )
+      if(response.nModified > 0){
+        return {error: false}
+      }else {
+        return response
+      }
+    } catch (error) {
+      return error
+    }
+  }
+
+  return { createBlog, getBlog, getBlogInfo, getAllBlogs, getAllBlogsInfo, findLastBlogs, add_visit };
 };

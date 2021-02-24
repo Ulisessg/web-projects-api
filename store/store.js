@@ -12,7 +12,7 @@ db.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     console.error(err);
   });
 
-//CRUD
+//  CRUD
 async function findOne(schema, query) {
   try {
     //Doesn't matter if the result is empty, network check if !result

@@ -8,18 +8,10 @@
   ],
   "routes": [
     {
+      "source": "/api/(*.)*",
       "headers": {
-        "source": "/api/(*.)*",
-        "headers": [
-          {
-            "key": "Access-Control-Allow-Origin",
-            "value": "*"
-          },
-          {
-            "key": "Access-Control-Allow-Methods",
-            "value": "GET, POST"
-          }
-        ]
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST"
       }
     }
   ],

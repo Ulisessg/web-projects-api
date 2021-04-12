@@ -1,10 +1,16 @@
 const express = require('express');
 const controller = require('./index.js');
 const router = express.Router();
+const cors = require('cors');
 
 const { NODE_ENV } = process.env;
 
-router.post('/add-gist', async (req, res) => {
+const corsOptions = {
+  origin: NODE_ENV === 'production' ? 'https://ulisessg.com/' : '*',
+  methods: 'POST',
+};
+
+router.post('/add-gist', cors(corsOptions}), async (req, res) => {
   const gist = {
     subjects: req.body.subjects,
     image: req.body.image,

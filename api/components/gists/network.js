@@ -10,7 +10,7 @@ const corsOptions = {
   methods: 'POST',
 };
 
-router.post('/add-gist', cors(corsOptions}), async (req, res) => {
+router.post('/add-gist', cors(corsOptions), async (req, res) => {
   const gist = {
     subjects: req.body.subjects,
     image: req.body.image,

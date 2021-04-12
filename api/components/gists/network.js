@@ -53,4 +53,31 @@ router.post('/add-gist', cors(corsOptions), async (req, res) => {
     });
 });
 
+router.get('/', async (req, res) => {
+  const query = {};
+  controller
+    .getGists(query)
+    .then((data) => {
+      if (data.length === 0) {
+        res.status(500).json({
+          error: true,
+          message: 'Error getting gists',
+        });
+      } else if (Object.values(data[0]).length > 0) {
+        res.status(200).json({
+          error: false,
+          message: data,
+        });
+      }
+    })
+    .catch((err) => {
+      if (NODE_ENV === 'development') {
+        console.log(err);
+        res.status(500).json({ error: true, message: 'Error getting gists' });
+      } else {
+        res.status(500).json({ error: true, message: 'Error getting gists' });
+      }
+    });
+});
+
 module.exports = router;

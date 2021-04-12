@@ -22,5 +22,15 @@ module.exports = function gistsController(injectedStore) {
     }
   }
 
-  return { addGist };
+  async function getGists(query) {
+    try {
+      const gists = await store.findMany(GistsSchema, {});
+
+      return gists;
+    } catch (error) {
+      return 'Error getting gists';
+    }
+  }
+
+  return { addGist, getGists };
 };

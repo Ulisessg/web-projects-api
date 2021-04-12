@@ -4,6 +4,7 @@ require('dotenv').config();
 //Dependencies
 const express = require('express');
 const blog = require('./components/blog/network.js');
+const gists = require('./components/gists/network.js');
 const helmet = require('helmet');
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 
 //Routes
 app.use('/api/blog', blog);
+app.use('/api/gist', gists);
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);

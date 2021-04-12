@@ -35,7 +35,9 @@
     }
   ],
   "env": {
-    "URI": "@uri",
-    "PORT": "@port"
+    "URI": "@last-uri",
+    "PORT": "@port",
+    "EMAIL": "@email",
+    "PASSWORD": "@password"
   }
 }

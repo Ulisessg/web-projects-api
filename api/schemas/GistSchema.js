@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const AddGistSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
   subjects: {
     type: Array,
     required: true,

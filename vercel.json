@@ -20,18 +20,18 @@
       "methods": ["GET"],
       "headers": {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "dest": "/api/index.js"
-      }
+        "Access-Control-Allow-Origin": "*"
+      },
+      "dest": "/api/index.js"
     },
     {
       "src": "/api/gist/add-gist",
       "methods": ["POST"],
       "headers": {
         "Access-Control-Allow-Origin": "https://ulisessg.com",
-        "Content-Type": "application/json",
-        "dest": "/api/index.js"
-      }
+        "Content-Type": "application/json"
+      },
+      "dest": "/api/index.js"
     }
   ],
   "env": {

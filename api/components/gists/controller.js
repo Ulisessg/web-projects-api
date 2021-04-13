@@ -9,6 +9,10 @@ module.exports = function gistsController(injectedStore) {
 
   async function addGist(data) {
     try {
+      const filesCount = await GistsSchema.countDocuments();
+
+      data.id = filesCount + 1;
+
       const gist = new GistsSchema(data);
       const response = await store.insertOne(gist);
 

@@ -28,7 +28,7 @@ module.exports = function gistsController(injectedStore) {
 
   async function getGists(query) {
     try {
-      const gists = await store.findMany(GistsSchema, {});
+      const gists = await store.findLimitedDocuments(GistsSchema, {}, {}, 10);
 
       return gists;
     } catch (error) {

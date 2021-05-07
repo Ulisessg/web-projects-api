@@ -27,7 +27,12 @@ module.exports = (injectedStore) => {
 
   async function getAllBlogsInfo(query) {
     try {
-      const infos = await store.findMany(BlogSchema, query, {content: 0, name: 0, visits: 0, id: 0});
+      const infos = await store.findMany(BlogSchema, query, {
+        content: 0,
+        name: 0,
+        visits: 0,
+        id: 0,
+      });
       return infos;
     } catch (error) {
       return error;
@@ -47,7 +52,7 @@ module.exports = (injectedStore) => {
   async function createBlog(data) {
     try {
       // Get how many blog are, and set the id adding 1
-      const totalBlogs = await BlogSchema.countDocuments()
+      const totalBlogs = await BlogSchema.countDocuments();
 
       const blog = {
         name: data.name,
@@ -58,49 +63,66 @@ module.exports = (injectedStore) => {
         seoCardUrl: data.seoCardUrl,
         // Visits setted to 0 by default
         visits: 0,
-        id: totalBlogs + 1
+        id: totalBlogs + 1,
       };
 
       const blogDocument = new BlogSchema(blog);
 
       const blogResponse = await store.insertOne(blogDocument);
 
-      if(blogResponse !== 'Document created'){
-        return 'Error creating blog'
+      if (blogResponse !== 'Document created') {
+        return 'Error creating blog';
       } else {
         return 'Blog created';
       }
-      
-
     } catch (error) {
       return error;
     }
   }
 
-  async function findLastBlogs (query, limit) {
-    const limitParsed = parseInt(limit)
+  async function findLastBlogs(query, skip, limit) {
+    const limitParsed = parseInt(limit);
+    const skipParsed = parseInt(skip);
 
     try {
-      const result = await store.findLimitedDocuments(BlogSchema, query, {content: 0, visits: 0}, limitParsed);
+      const result = await store.findLimitedDocuments(
+        BlogSchema,
+        query,
+        { content: 0, visits: 0 },
+        limitParsed,
+        skipParsed,
+      );
 
-      return result
+      return result;
     } catch (error) {
-      return error
+      return error;
     }
   }
 
   async function add_visit(blog_name) {
     try {
-      let response = await store.updateOne(BlogSchema, {name: blog_name}, {"$inc": {"visits": 1}} )
-      if(response.nModified > 0){
-        return {error: false}
-      }else {
-        return response
+      let response = await store.updateOne(
+        BlogSchema,
+        { name: blog_name },
+        { $inc: { visits: 1 } },
+      );
+      if (response.nModified > 0) {
+        return { error: false };
+      } else {
+        return response;
       }
     } catch (error) {
-      return error
+      return error;
     }
   }
 
-  return { createBlog, getBlog, getBlogInfo, getAllBlogs, getAllBlogsInfo, findLastBlogs, add_visit };
+  return {
+    createBlog,
+    getBlog,
+    getBlogInfo,
+    getAllBlogs,
+    getAllBlogsInfo,
+    findLastBlogs,
+    add_visit,
+  };
 };

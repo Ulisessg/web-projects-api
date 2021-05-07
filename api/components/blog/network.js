@@ -32,12 +32,12 @@ router.get('/', async (req, res) => {
 router.get('/all-blogs', async (req, res) => {
   let query;
 
-  const queryHasFields = Object.keys(req.body).length
+  const queryHasFields = Object.keys(req.body).length;
 
-  if(queryHasFields === 0){
-    query = {}
+  if (queryHasFields === 0) {
+    query = {};
   } else {
-    query = req.body
+    query = req.body;
   }
 
   controller
@@ -64,12 +64,12 @@ router.get('/all-blogs', async (req, res) => {
 router.get('/all-info', async (req, res) => {
   let query;
 
-  const queryHasFields = Object.keys(req.body).length
+  const queryHasFields = Object.keys(req.body).length;
 
-  if(queryHasFields === 0){
-    query = {}
+  if (queryHasFields === 0) {
+    query = {};
   } else {
-    query = req.body
+    query = req.body;
   }
 
   controller
@@ -109,20 +109,27 @@ router.get('/info', (req, res) => {
 //  Get last 10 entries
 
 router.get('/last-entries', async (req, res) => {
-  const limitSize = req.query.limit || 10
-  controller.findLastBlogs(req.body, limitSize)
+  const skip = req.query.skip;
+  const limit = req.query.limit;
+  controller
+    .findLastBlogs(req.body, skip, limit)
     .then((result) => {
-      if(result.length === 0 || result.ok === 0){
-        error(req, res, 404, 'Blogs not found', 'Check MongoDB status or limit value')
+      if (result.length === 0 || result.ok === 0) {
+        error(
+          req,
+          res,
+          404,
+          'Blogs not found',
+          'Check MongoDB status or limit value',
+        );
       } else {
-        success(req, res, 200, result)
+        success(req, res, 200, result);
       }
     })
     .catch((err) => {
-      error(req, res, 500, 'Internal server error', err)
-
-    })
-})
+      error(req, res, 500, 'Internal server error', err);
+    });
+});
 
 // CreateBlog
 router.post('/', async (req, res) => {
@@ -138,8 +145,8 @@ router.post('/', async (req, res) => {
   controller
     .createBlog(req.body)
     .then((response) => {
-      if(response === 'Error creating blog'){
-        error(req, res, 500, response)
+      if (response === 'Error creating blog') {
+        error(req, res, 500, response);
       } else {
         success(req, res, 201, response);
       }
@@ -150,16 +157,19 @@ router.post('/', async (req, res) => {
 });
 
 router.post('/add-visit', async (req, res) => {
-  const { blog_name } = req.body
-  controller.add_visit(blog_name).then((response) => {
-    if (response.error === true){
-      error(req,res, 500, 'Internal server error')
-    }else {
-      success(req, res, 201, response)
-    }
-  }).catch(() => {
-    error(req, res, 500, 'Internal server error')
-  })
-})
+  const { blog_name } = req.body;
+  controller
+    .add_visit(blog_name)
+    .then((response) => {
+      if (response.error === true) {
+        error(req, res, 500, 'Internal server error');
+      } else {
+        success(req, res, 201, response);
+      }
+    })
+    .catch(() => {
+      error(req, res, 500, 'Internal server error');
+    });
+});
 
 module.exports = router;

@@ -25,8 +25,11 @@ async function findOne(schema, query) {
 
 async function findMany(schema, query, projection) {
   try {
-    const proj = {...projection, _id: 0, __v: 0}
-    const result  = await schema.aggregate([{"$match": query}, {"$project": proj}])
+    const proj = { ...projection, _id: 0, __v: 0 };
+    const result = await schema.aggregate([
+      { $match: query },
+      { $project: proj },
+    ]);
     return result;
   } catch (err) {
     return err;
@@ -45,10 +48,10 @@ async function insertOne(document) {
 
 async function updateOne(schema, query, data) {
   try {
-    const response = await schema.updateOne(query, data)
-    return response
+    const response = await schema.updateOne(query, data);
+    return response;
   } catch (error) {
-    return error
+    return error;
   }
 }
 
@@ -56,15 +59,31 @@ function deleteOne(collection, id) {
   return true;
 }
 
-async function findLimitedDocuments (schema, query, projection, limit) {
+async function findLimitedDocuments(schema, query, projection, limit, skip) {
+  console.log(limit);
+  console.log(skip);
   try {
-    const proj = {...projection, _id: 0, __v: 0}
+    const proj = { ...projection, _id: 0, __v: 0 };
     // The filter is applied in controller
-    const result = await schema.aggregate([{"$match": query}, {"$project": proj}, {"$sort": {"id": -1}}, {"$limit": limit}])
-    return result
+    const result = await schema
+      .aggregate([
+        { $match: query },
+        { $project: proj },
+        { $sort: { id: -1 } },
+        { $limit: limit || 5 },
+      ])
+      .skip(skip);
+    return result;
   } catch (error) {
-    return error
+    return error;
   }
 }
 
-module.exports = { findOne, findMany, insertOne, updateOne, deleteOne, findLimitedDocuments };
+module.exports = {
+  findOne,
+  findMany,
+  insertOne,
+  updateOne,
+  deleteOne,
+  findLimitedDocuments,
+};

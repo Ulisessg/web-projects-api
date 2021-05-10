@@ -26,12 +26,16 @@ const CreateBlogSchema = new mongoose.Schema({
   },
   visits: {
     type: Number,
-    required: true
+    required: true,
   },
   id: {
     type: Number,
-    required: true
-  }
+    required: true,
+  },
+  language: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('blogs', CreateBlogSchema);

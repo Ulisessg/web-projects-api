@@ -61,9 +61,12 @@ router.post('/add-gist', cors(corsOptions), async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-  const query = {};
+  const query = {
+    name: req.query.name
+  };
   const skip = req.query.skip;
   const limit = req.query.limit;
+
 
   controller
     .getGists(query, skip, limit)

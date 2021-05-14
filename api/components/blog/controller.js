@@ -8,7 +8,7 @@ module.exports = (injectedStore) => {
   }
   async function getBlog(query) {
     try {
-      const result = await store.findOne(BlogSchema, query);
+      const result = await store.findOne(BlogSchema, query, { _id: 0 });
 
       return result;
     } catch (error) {
@@ -18,7 +18,7 @@ module.exports = (injectedStore) => {
 
   async function getAllBlogs(query) {
     try {
-      const blogs = await store.findMany(BlogSchema, query);
+      const blogs = await store.findMany(BlogSchema, query, { _id: 0 });
       return blogs;
     } catch (err) {
       return err;

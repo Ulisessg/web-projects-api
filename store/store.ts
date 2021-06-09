@@ -1,10 +1,9 @@
-//@ts-check
-const db = require('mongoose');
+import db from 'mongoose';
 
-//DB connection
+// DB connection
 const uri = process.env.URI;
 
-db.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+db.connect(<string>uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('[DB] connected');
   })
@@ -13,9 +12,9 @@ db.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   });
 
 //  CRUD
-async function findOne(schema, query) {
+async function findOne(schema: any, query: any) {
   try {
-    //Doesn't matter if the result is empty, network check if !result
+    // Doesn't matter if the result is empty, network check if !result
     const result = await schema.findOne(query);
     return result;
   } catch (error) {
@@ -23,7 +22,7 @@ async function findOne(schema, query) {
   }
 }
 
-async function findMany(schema, query, projection) {
+async function findMany(schema: any, query: any, projection: any) {
   try {
     const proj = { ...projection, _id: 0, __v: 0 };
     const result = await schema.aggregate([
@@ -36,7 +35,7 @@ async function findMany(schema, query, projection) {
   }
 }
 
-async function insertOne(document) {
+async function insertOne(document: any) {
   try {
     await document.save();
     return 'Document created';
@@ -46,7 +45,7 @@ async function insertOne(document) {
   }
 }
 
-async function updateOne(schema, query, data) {
+async function updateOne(schema: any, query: any, data: any) {
   try {
     const response = await schema.updateOne(query, data);
     return response;
@@ -55,11 +54,8 @@ async function updateOne(schema, query, data) {
   }
 }
 
-function deleteOne(collection, id) {
-  return true;
-}
-
-async function findLimitedDocuments(schema, query, projection, limit, skip) {
+// eslint-disable-next-line max-len
+async function findLimitedDocuments(schema: any, query: any, projection: any, limit: any, skip: any) {
   console.log(limit);
   console.log(skip);
   try {
@@ -84,6 +80,5 @@ module.exports = {
   findMany,
   insertOne,
   updateOne,
-  deleteOne,
   findLimitedDocuments,
 };

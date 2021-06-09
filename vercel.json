@@ -17,7 +17,9 @@
     },
     {
       "src": "/api/gist",
-      "methods": ["GET"],
+      "methods": [
+        "GET"
+      ],
       "headers": {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*"
@@ -26,9 +28,11 @@
     },
     {
       "src": "/api/gist/add-gist",
-      "methods": ["POST"],
+      "methods": [
+        "POST"
+      ],
       "headers": {
-        "Access-Control-Allow-Origin": "https://ulisessg.com",
+        "Access-Control-Allow-Origin": "ulisessg.com",
         "Content-Type": "application/json"
       },
       "dest": "/api/index.js"

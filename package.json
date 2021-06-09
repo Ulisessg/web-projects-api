@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint \"api/**\" --fix",
     "dev": "NODE_ENV=development nodemon ./api/index.ts -L",
-    "build": "NODE_ENV=production pm2 start ./api/index.ts",
+    "build": "NODE_ENV=production ./out/api/index.js",
     "prepare": "husky install"
   },
   "engines": {

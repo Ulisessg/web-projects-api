@@ -33,7 +33,8 @@
     }
   ],
   "env": {
-    "URI": "@last-uri",
+    "DB_URL": "DB_URL",
+    "DB_USERNAME": "DB_USERNAME",
     "PORT": "@port",
     "EMAIL": "@email",
     "PASSWORD": "@password"

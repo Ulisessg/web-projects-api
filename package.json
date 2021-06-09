@@ -1,5 +1,4 @@
 {
-  "type": "module",
   "name": "web-projects-api",
   "version": "1.0.0",
   "description": "Api of UD, website that will be focused on sharing knowledge, mainly about technology and a design system.",
@@ -7,7 +6,7 @@
   "scripts": {
     "lint": "eslint \"api/**\" --fix",
     "dev": "NODE_ENV=development nodemon ./api/index.ts -L",
-    "build": "NODE_ENV=production ./out/api/index.js",
+    "build": "NODE_ENV=production node ./out/api/index.js",
     "prepare": "husky install"
   },
   "engines": {

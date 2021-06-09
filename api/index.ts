@@ -2,7 +2,7 @@
 // ENV
 // Dependencies
 import express from 'express';
-import '../env.ts';
+import '../env';
 import helmet from 'helmet';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument = require('./documentation.json');

@@ -1,12 +1,12 @@
-// @ts-check
-const BlogSchema = require('../../schemas/BlogSchema.js');
+/* eslint-disable import/no-unresolved */
+import BlogSchema from '../../schemas/BlogSchema';
 
-module.exports = (injectedStore) => {
+module.exports = (injectedStore: any) => {
   let store = injectedStore;
   if (!store) {
-    store = import('../../../store/store.js');
+    store = import('../../../store/store');
   }
-  async function getBlog(query) {
+  async function getBlog(query: any) {
     try {
       const result = await store.findOne(BlogSchema, query, { _id: 0 });
 
@@ -16,7 +16,7 @@ module.exports = (injectedStore) => {
     }
   }
 
-  async function getAllBlogs(query) {
+  async function getAllBlogs(query: any) {
     try {
       const blogs = await store.findMany(BlogSchema, query, { _id: 0 });
       return blogs;
@@ -25,7 +25,7 @@ module.exports = (injectedStore) => {
     }
   }
 
-  async function getAllBlogsInfo(query) {
+  async function getAllBlogsInfo(query: any) {
     try {
       const infos = await store.findMany(BlogSchema, query, {
         content: 0,
@@ -39,7 +39,7 @@ module.exports = (injectedStore) => {
     }
   }
 
-  async function getBlogInfo(query) {
+  async function getBlogInfo(query: any) {
     try {
       const result = await store.findOne(BlogSchema, query);
 
@@ -49,7 +49,7 @@ module.exports = (injectedStore) => {
     }
   }
 
-  async function createBlog(data) {
+  async function createBlog(data: any) {
     try {
       // Get how many blog are, and set the id adding 1
       const totalBlogs = await BlogSchema.countDocuments();
@@ -79,9 +79,9 @@ module.exports = (injectedStore) => {
     }
   }
 
-  async function findLastBlogs(query, skip, limit) {
-    const limitParsed = parseInt(limit);
-    const skipParsed = parseInt(skip);
+  async function findLastBlogs(query: any, skip: any, limit: any) {
+    const limitParsed = parseInt(limit, 10);
+    const skipParsed = parseInt(skip, 10);
 
     try {
       const result = await store.findLimitedDocuments(
@@ -98,7 +98,8 @@ module.exports = (injectedStore) => {
     }
   }
 
-  async function add_visit(blog_name) {
+  // eslint-disable-next-line camelcase
+  async function add_visit(blog_name: string) {
     try {
       const response = await store.updateOne(
         BlogSchema,

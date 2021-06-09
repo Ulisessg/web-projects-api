@@ -14,5 +14,7 @@
     "plugins": [
         "@typescript-eslint"
     ],
-    "rules": {}
+    "rules": {
+        "import/extensions": "off"
+    }
 }

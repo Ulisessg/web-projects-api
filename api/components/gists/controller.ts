@@ -1,16 +1,18 @@
-// @ts-check
-const GistsSchema = require('../../schemas/GistSchema.js');
+/* eslint-disable global-require */
+/* eslint-disable import/no-unresolved */
+import GistsSchema from '../../schemas/GistSchema';
 
-module.exports = function gistsController(injectedStore) {
+export default function gistsController(injectedStore: any) {
   let store = injectedStore;
   if (!store) {
     store = require('../../../store/store');
   }
 
-  async function addGist(data) {
+  async function addGist(data: any) {
     try {
       const filesCount = await GistsSchema.countDocuments();
 
+      // eslint-disable-next-line no-param-reassign
       data.id = filesCount + 1;
 
       const gist = new GistsSchema(data);
@@ -25,9 +27,9 @@ module.exports = function gistsController(injectedStore) {
     }
   }
 
-  async function getGists(query = {}, skip, limit) {
-    const limitParsed = parseInt(limit);
-    const skipParsed = parseInt(skip);
+  async function getGists(query = {}, skip: any, limit: any) {
+    const limitParsed = parseInt(limit, 10);
+    const skipParsed = parseInt(skip, 10);
     try {
       const gists = await store.findLimitedDocuments(
         GistsSchema,
@@ -44,4 +46,4 @@ module.exports = function gistsController(injectedStore) {
   }
 
   return { addGist, getGists };
-};
+}

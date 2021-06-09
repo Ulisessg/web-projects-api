@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import BlogSchema from '../../schemas/BlogSchema';
 
-module.exports = (injectedStore: any) => {
+export default (injectedStore: any) => {
   let store = injectedStore;
   if (!store) {
     store = import('../../../store/store');

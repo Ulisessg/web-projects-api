@@ -75,7 +75,7 @@ async function findLimitedDocuments(schema: any, query: any, projection: any, li
   }
 }
 
-module.exports = {
+export default {
   findOne,
   findMany,
   insertOne,

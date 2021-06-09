@@ -1,5 +1,6 @@
 const express = require('express');
 const controller = require('./index.js');
+
 const router = express.Router();
 const cors = require('cors');
 
@@ -28,8 +29,8 @@ router.post('/add-gist', cors(corsOptions), async (req, res) => {
       .addGist(gist)
       .then((response) => {
         if (
-          response === 'Error adding gist :(' ||
-          response === 'Error creating gist'
+          response === 'Error adding gist :('
+          || response === 'Error creating gist'
         ) {
           res.status(500).json({
             error: false,
@@ -62,10 +63,10 @@ router.post('/add-gist', cors(corsOptions), async (req, res) => {
 
 router.get('/', async (req, res) => {
   let query = {
-    name: req.query.name
+    name: req.query.name,
   };
-  const skip = req.query.skip;
-  const limit = req.query.limit;
+  const { skip } = req.query;
+  const { limit } = req.query;
 
   if (typeof query.name === 'undefined') {
     query = {};

@@ -1,4 +1,4 @@
-//@ts-check
+// @ts-check
 const BlogSchema = require('../../schemas/BlogSchema.js');
 
 module.exports = (injectedStore) => {
@@ -72,9 +72,8 @@ module.exports = (injectedStore) => {
 
       if (blogResponse !== 'Document created') {
         return 'Error creating blog';
-      } else {
-        return 'Blog created';
       }
+      return 'Blog created';
     } catch (error) {
       return error;
     }
@@ -101,16 +100,15 @@ module.exports = (injectedStore) => {
 
   async function add_visit(blog_name) {
     try {
-      let response = await store.updateOne(
+      const response = await store.updateOne(
         BlogSchema,
         { name: blog_name },
         { $inc: { visits: 1 } },
       );
       if (response.nModified > 0) {
         return { error: false };
-      } else {
-        return response;
       }
+      return response;
     } catch (error) {
       return error;
     }

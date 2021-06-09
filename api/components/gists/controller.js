@@ -1,4 +1,4 @@
-//@ts-check
+// @ts-check
 const GistsSchema = require('../../schemas/GistSchema.js');
 
 module.exports = function gistsController(injectedStore) {
@@ -18,9 +18,8 @@ module.exports = function gistsController(injectedStore) {
 
       if (response !== 'Document created') {
         return 'Error creating gist';
-      } else {
-        return 'Gist created';
       }
+      return 'Gist created';
     } catch (error) {
       return 'Error adding gist :(';
     }

@@ -1,21 +1,21 @@
-//ENV
+// ENV
 require('dotenv').config();
 
-//Dependencies
+// Dependencies
 const express = require('express');
+const helmet = require('helmet');
 const blog = require('./components/blog/network.js');
 const gists = require('./components/gists/network.js');
-const helmet = require('helmet');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-//Middlewares
+// Middlewares
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//Routes
+// Routes
 app.use('/api/blog', blog);
 app.use('/api/gist', gists);
 

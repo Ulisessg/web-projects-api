@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
   controller
     .getBlog(query)
     .then((result) => {
-      //Check if the query returns null
+      // Check if the query returns null
       if (!result) {
         error(req, res, 404, 'Blog not found');
       } else {
@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
       }
     })
     .catch((err) => {
-      //Get MongoDB problems
+      // Get MongoDB problems
       error(req, res, 500, 'Internal Server Error', err);
     });
 });
@@ -109,8 +109,8 @@ router.get('/info', (req, res) => {
 //  Get last 10 entries
 
 router.get('/last-entries', async (req, res) => {
-  const skip = req.query.skip;
-  const limit = req.query.limit;
+  const { skip } = req.query;
+  const { limit } = req.query;
   controller
     .findLastBlogs(req.body, skip, limit)
     .then((result) => {

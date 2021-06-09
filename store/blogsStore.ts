@@ -1,7 +1,10 @@
 import db from 'mongoose';
 
 // DB connection
-const uri = process.env.URI;
+
+const DB_TABLE = 'blogs';
+
+const uri: string = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_URL}/${DB_TABLE}?retryWrites=true&w=majority`;
 
 db.connect(<string>uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {

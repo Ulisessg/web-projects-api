@@ -4,7 +4,7 @@ import BlogSchema from '../../schemas/BlogSchema';
 export default (injectedStore: any) => {
   let store = injectedStore;
   if (!store) {
-    store = import('../../../store/store');
+    store = import('../../../store/blogsStore');
   }
   async function getBlog(query: any) {
     try {

@@ -1,12 +1,13 @@
+/* eslint-disable import/no-unresolved */
 import db from 'mongoose';
+
+import { createUri } from './storeConfigs';
 
 // DB connection
 
-const DB_TABLE = 'blogs';
+const DB_TABLE: string = 'blogs';
 
-const uri: string = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_URL}/${DB_TABLE}?retryWrites=true&w=majority`;
-
-db.connect(<string>uri, { useNewUrlParser: true, useUnifiedTopology: true })
+db.connect(createUri(DB_TABLE), { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('[DB] connected');
   })

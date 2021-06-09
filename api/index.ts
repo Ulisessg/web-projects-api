@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 // ENV
 // Dependencies
 import express from 'express';
@@ -6,8 +7,8 @@ import * as dotenv from 'dotenv';
 import { join } from 'path';
 
 import helmet from 'helmet';
-import blog from './components/blog/network.ts';
-import gists from './components/gists/network.ts';
+import blog from './components/blog/network';
+import gists from './components/gists/network';
 
 dotenv.config({ path: join(__dirname, '..', '.env') });
 

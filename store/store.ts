@@ -1,4 +1,5 @@
 import db from 'mongoose';
+import { } from 'dotenv';
 
 // DB connection
 const uri = process.env.URI;

@@ -5,7 +5,7 @@
   "main": "./api/index.js",
   "scripts": {
     "lint": "eslint \"api/**\" --fix",
-    "dev": "NODE_ENV=development nodemon ./api/index.js -L",
+    "dev": "NODE_ENV=development nodemon ./api/index.ts -L",
     "build": "NODE_ENV=production node ./api/index.js",
     "prepare": "husky install"
   },

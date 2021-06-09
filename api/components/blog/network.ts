@@ -4,7 +4,7 @@ import express from 'express';
 
 import { error, success } from '../../../network/responses';
 
-const controller = require('./index.js');
+import controller from './index';
 
 const router = express.Router();
 

@@ -1,0 +1,280 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Web projects API",
+    "description": "An api for my personal projects 💚",
+    "version": "2.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://web-projects-api.vercel.app/api"
+    }
+  ],
+  "tags": [
+    {
+      "name": "blogs",
+      "description": "All my blogs entries"
+    },
+    {
+      "name": "gists",
+      "description": "My gists (code pieces)"
+    }
+  ],
+  "paths": {
+    "/api/blog/last-entries": {
+      "get": {
+        "tags": [
+          "blogs"
+        ],
+        "summary": "Return my blogpost entries",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/name"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(OK) You get a JSON with last blogs ordered by publication date.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/blogResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/api/add-visit": {
+      "post": {
+        "tags": [
+          "blogs"
+        ],
+        "summary": "Add an visit to the blog entry",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/blog_name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(OK) Visit registered",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "boolean",
+                      "default": false
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/api/gist": {
+      "get": {
+        "tags": [
+          "gists"
+        ],
+        "summary": "Return my gists",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/name"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(OK) You get a JSON with last gists ordered by publication date",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/gistsResponseSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "500": {
+        "description": "(Error) Documents not founded or Internal server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "message": {
+                  "type": "string",
+                  "default": "Error getting documents or internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "name": {
+        "in": "query",
+        "description": "Return an specific document",
+        "required": false,
+        "name": "name",
+        "schema": {
+          "type": "string",
+          "description": "The name of the elemen to get, for example the blog name"
+        }
+      },
+      "limit": {
+        "in": "query",
+        "description": "Limit the number of documents to get.",
+        "required": false,
+        "name": "limit",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "skip": {
+        "in": "query",
+        "description": "All documents are ordered by id, you can put from where beginning to count",
+        "required": false,
+        "name": "skip",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "blog_name": {
+        "in": "query",
+        "description": "Is the blog name",
+        "required": true,
+        "name": "blog_name",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "schemas": {
+      "blogResponseSchema": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "boolean",
+              "default": false
+            },
+            "message": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "metaSubjects": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "metaDescription": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "number"
+                  },
+                  "language": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "gistsResponseSchema": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "boolean",
+              "default": false
+            },
+            "message": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "subjects": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "image": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "githubLink": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "number"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

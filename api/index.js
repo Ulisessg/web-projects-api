@@ -1,11 +1,15 @@
 // ENV
-require('dotenv').config();
-
 // Dependencies
-const express = require('express');
-const helmet = require('helmet');
-const blog = require('./components/blog/network.js');
-const gists = require('./components/gists/network.js');
+import express from 'express';
+
+import * as dotenv from 'dotenv';
+import { join } from 'path';
+
+import helmet from 'helmet';
+import blog from './components/blog/network.ts';
+import gists from './components/gists/network.ts';
+
+dotenv.config({ path: join(__dirname, '..', '.env') });
 
 const app = express();
 const PORT = process.env.PORT || 3000;

@@ -1,5 +1,9 @@
-const express = require('express');
-const { error, success } = require('../../../network/responses.js');
+/* eslint-disable camelcase */
+/* eslint-disable import/no-unresolved */
+import express from 'express';
+
+import { error, success } from '../../../network/responses';
+
 const controller = require('./index.js');
 
 const router = express.Router();
@@ -13,7 +17,7 @@ router.get('/', async (req, res) => {
 
   controller
     .getBlog(query)
-    .then((result) => {
+    .then((result: any) => {
       // Check if the query returns null
       if (!result) {
         error(req, res, 404, 'Blog not found');
@@ -21,7 +25,7 @@ router.get('/', async (req, res) => {
         success(req, res, 200, result);
       }
     })
-    .catch((err) => {
+    .catch((err: any) => {
       // Get MongoDB problems
       error(req, res, 500, 'Internal Server Error', err);
     });
@@ -42,13 +46,13 @@ router.get('/all-blogs', async (req, res) => {
 
   controller
     .getAllBlogs(query)
-    .then((response) => {
+    .then((response: any) => {
       if (!response) {
         error(req, res, 404, 'Blogs not found');
       }
       success(req, res, 200, response);
     })
-    .catch((message) => {
+    .catch(() => {
       error(
         req,
         res,
@@ -74,13 +78,13 @@ router.get('/all-info', async (req, res) => {
 
   controller
     .getAllBlogsInfo(query)
-    .then((response) => {
+    .then((response: any) => {
       if (!response) {
         error(req, res, 404, 'Infos not found');
       }
       success(req, res, 200, response);
     })
-    .catch((message) => {
+    .catch((message: any) => {
       error(req, res, 500, 'Internal server error', message);
     });
 });
@@ -94,14 +98,14 @@ router.get('/info', (req, res) => {
 
   controller
     .getBlogInfo(query)
-    .then((result) => {
+    .then((result: any) => {
       if (!result) {
         error(req, res, 404, 'Blog info not found');
       } else {
         success(req, res, 200, result);
       }
     })
-    .catch((err) => {
+    .catch((err: any) => {
       error(req, res, 500, 'Internal server error', err);
     });
 });
@@ -113,7 +117,7 @@ router.get('/last-entries', async (req, res) => {
   const { limit } = req.query;
   controller
     .findLastBlogs(req.body, skip, limit)
-    .then((result) => {
+    .then((result: any) => {
       if (result.length === 0 || result.ok === 0) {
         error(
           req,
@@ -126,7 +130,7 @@ router.get('/last-entries', async (req, res) => {
         success(req, res, 200, result);
       }
     })
-    .catch((err) => {
+    .catch((err: any) => {
       error(req, res, 500, 'Internal server error', err);
     });
 });
@@ -144,14 +148,14 @@ router.post('/', async (req, res) => {
   }
   controller
     .createBlog(req.body)
-    .then((response) => {
+    .then((response: any) => {
       if (response === 'Error creating blog') {
         error(req, res, 500, response);
       } else {
         success(req, res, 201, response);
       }
     })
-    .catch((err) => {
+    .catch(() => {
       error(req, res, 500, 'Error creating blog');
     });
 });
@@ -160,7 +164,7 @@ router.post('/add-visit', async (req, res) => {
   const { blog_name } = req.body;
   controller
     .add_visit(blog_name)
-    .then((response) => {
+    .then((response: any) => {
       if (response.error === true) {
         error(req, res, 500, 'Internal server error');
       } else {

@@ -24,4 +24,4 @@ function error(
   });
 }
 
-module.exports = { success, error };
+export { success, error };

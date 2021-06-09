@@ -1,5 +1,6 @@
-const express = require('express');
-const controller = require('./index.js');
+/* eslint-disable import/no-unresolved */
+import express from 'express';
+import controller from './index';
 
 const router = express.Router();
 const cors = require('cors');
@@ -62,7 +63,11 @@ router.post('/add-gist', cors(corsOptions), async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-  let query = {
+  interface queryInterface {
+    name?: string | undefined | any;
+  }
+
+  let query: queryInterface = {
     name: req.query.name,
   };
   const { skip } = req.query;

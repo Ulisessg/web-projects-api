@@ -57,8 +57,6 @@ async function updateOne(schema: any, query: any, data: any) {
 
 // eslint-disable-next-line max-len
 async function findLimitedDocuments(schema: any, query: any, projection: any, limit: any, skip: any) {
-  console.log(limit);
-  console.log(skip);
   try {
     const proj = { ...projection, _id: 0, __v: 0 };
     // The filter is applied in controller

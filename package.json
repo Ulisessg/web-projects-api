@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint \"api/**\" --fix",
     "dev": "NODE_ENV=development nodemon ./api/index.ts -L",
-    "build": "NODE_ENV=production node ./api/index.ts",
+    "build": "NODE_ENV=production pm2 start ./api/index.ts",
     "prepare": "husky install"
   },
   "engines": {
@@ -45,6 +45,7 @@
     "express": "4.17.1",
     "helmet": "4.4.1",
     "mongoose": "5.12.3",
+    "pm2": "^5.0.4",
     "swagger-ui-express": "4.1.6"
   }
 }

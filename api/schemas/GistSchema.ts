@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const AddGistSchema = new mongoose.Schema({
   title: {
@@ -27,4 +27,4 @@ const AddGistSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('gists', AddGistSchema);
+export default mongoose.model('gists', AddGistSchema);

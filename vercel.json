@@ -6,8 +6,7 @@
       "headers": {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*"
-      },
-      "dest": "/api/out/index.js"
+      }
     },
     {
       "src": "/api/gist",
@@ -17,8 +16,7 @@
       "headers": {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*"
-      },
-      "dest": "/api/out/index.js"
+      }
     },
     {
       "src": "/api/gist/add-gist",
@@ -28,8 +26,7 @@
       "headers": {
         "Access-Control-Allow-Origin": "ulisessg.com",
         "Content-Type": "application/json"
-      },
-      "dest": "/api/out/index.js"
+      }
     }
   ],
   "env": {

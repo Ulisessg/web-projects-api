@@ -15,6 +15,7 @@ Clone the repository
 - ### [MongoDB](https://university.mongodb.com/)
 - ### [Express](https://expressjs.com/es/)
 - ### [Vercel](https://vercel.com/)
+- ### [Typescript](https://www.typescriptlang.org/)
 
 ## Deploy 🚀
 
@@ -30,132 +31,155 @@ Work in preogress
 
     npm run start
 
-# Schemas:
+## API documentation
 
-## Blog Schema: JSON
+### Version: 2.0.0
+
+### /api/blog/last-entries
+
+#### GET
+##### Summary
+
+Return my blogpost entries
+
+##### Parameters
+
+| Name  | Located in | Description                                                                | Required | Schema |
+| ----- | ---------- | -------------------------------------------------------------------------- | -------- | ------ |
+| name  | query      | Return an specific document                                                | No       | string |
+| limit | query      | Limit the number of documents to get.                                      | No       | string |
+| skip  | query      | All documents are ordered by id, you can put from where beginning to count | No       | string |
+
+##### Responses
+
+| Code | Description                                                      |
+| ---- | ---------------------------------------------------------------- |
+| 200  | (OK) You get a JSON with last blogs ordered by publication date. |
+| 500  | (Error) Documents not founded or Internal server error           |
+
+### /api/add-visit
+
+#### POST
+##### Summary
+
+Add an visit to the blog entry
+
+##### Parameters
+
+| Name      | Located in | Description      | Required | Schema |
+| --------- | ---------- | ---------------- | -------- | ------ |
+| blog_name | query      | Is the blog name | Yes      | string |
+
+##### Responses
+
+| Code | Description                                            |
+| ---- | ------------------------------------------------------ |
+| 200  | (OK) Visit registered                                  |
+| 500  | (Error) Documents not founded or Internal server error |
+
+### /api/gist
+
+#### GET
+##### Summary
+
+Return my gists
+
+##### Parameters
+
+| Name  | Located in | Description                                                                | Required | Schema |
+| ----- | ---------- | -------------------------------------------------------------------------- | -------- | ------ |
+| name  | query      | Return an specific document                                                | No       | string |
+| limit | query      | Limit the number of documents to get.                                      | No       | string |
+| skip  | query      | All documents are ordered by id, you can put from where beginning to count | No       | string |
+
+##### Responses
+
+| Code | Description                                                     |
+| ---- | --------------------------------------------------------------- |
+| 200  | (OK) You get a JSON with last gists ordered by publication date |
+| 500  | (Error) Documents not founded or Internal server error          |
+
+### Models
+
+#### blogResponseSchema
+
+| Name               | Type  | Description | Required |
+| ------------------ | ----- | ----------- | -------- |
+| blogResponseSchema | array |             |          |
+
+#### gistsResponseSchema
+
+| Name                | Type  | Description | Required |
+| ------------------- | ----- | ----------- | -------- |
+| gistsResponseSchema | array |             |          |
+
+## DB Schemas:
+
+### Gist Schema
 
     {
-        name: {
-            type: String,
-            required: true,
-        },
-        content: {
-            type: String,
-            required: true,
-        },
         title: {
             type: String,
             required: true,
         },
-        metaDescription: {
-            type: String,
+        subjects: {
+          type: Array,
+          required: true,
         },
-        metaSubjects: {
-            type: Array,
+        image: {
+          type: String,
+          required: true,
+        },
+        description: {
+            type: String,
             required: true,
         },
-        seoCardUrl: {
+        githubLink: {
             type: String,
             required: true,
-        },
-        visits: {
-            type: Number,
-            required: true
         },
         id: {
             type: Number,
-            required: true
+            required: true,
         }
     }
 
-# Endpoints
-
-## Route
-
-    Get a blog: Return a specific blog
-
-    Method: GET
-
-    /api/blog?name=nameOfBlog
-
-
-
-## Route
-
-    Get all blogs: Return all blogs
-
-    Method: GET
-    
-    /api/blog/all-blogs
-
-## Route
-
-    Get all blogs info: Return info about blogs
-
-    Method: GET
-    
-    /api/blog/all-info
-
-## Route
-
-    Get info about one blog
-
-    Method: GET
-
-    /api/blog/info?name=NameOfBlog
-
-## Route
-
-    Get last 10 entries
-
-    Method: GET
-
-    /api/blog/last-entries
-
-    If you want to get less blogs:
-
-    /api/blog/last-entries?limit=Number
-
-## Route
-
-    // Create a blog, use Blog Schema
-
-    Method: POST
-
-    /api/blog
-
-    // Schema
+### Blog Schema: JSON
 
     {
-        name: {
-            type: String,
-            required: true,
-        },
-        content: {
-            type: String,
-            required: true,
-        },
-        title: {
-            type: String,
-            required: true,
-        },
-        metaDescription: {
-            type: String,
-        },
-        metaSubjects: {
-            type: Array,
-            required: true,
-        },
-        seoCardUrl: {
-            type: String,
-            required: true,
-        },
-        visits: {
-            type: Number,
-            required: true
-        },
-        id: {
-            type: Number,
-            required: true
-        }
+      name: {
+        type: String,
+        required: true,
+      },
+      content: {
+        type: String,
+        required: true,
+      },
+      title: {
+        type: String,
+        required: true,
+      },
+      metaDescription: {
+        type: String,
+      },
+      metaSubjects: {
+        type: Array,
+        required: true,
+      },
+      seoCardUrl: {
+        type: String,
+        required: true,
+      },
+      visits: {
+        type: Number,
+        required: true,
+      },
+      id: {
+        type: Number,
+        required: true,
+      },
+      language: {
+        type: String,
+        required: true,
+      }
     }

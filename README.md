@@ -19,7 +19,8 @@ Clone the repository
 
 ## Deploy 🚀
 
-Work in preogress
+- [Blogs entries](https://web-projects-api.ulisessg.vercel.app/api/blog/all-blogs)
+- [Gists](https://web-projects-api-ulisessg.vercel.app/api/gist)
 
 ## Scripts
 

@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
-      - run: npm install && npm install -g typescript && npm install -g vercel
+      - run: npm install && sudo npm install -g typescript && sudo npm install -g vercel
       - run: npm run lint
       - run: tsc
       - run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }}

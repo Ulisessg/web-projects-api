@@ -177,10 +177,10 @@ router.post('/add-visit', async (req, res) => {
 });
 
 router.post('/add-like', async (req, res) => {
-  const { blogName } = req.body;
+  const { name } = req.body;
 
   controller
-    .addLike(blogName)
+    .addLike(name)
     .then((response: any) => {
       if (response.error === true) {
         error(req, res, 500, 'Internal server error');

@@ -106,12 +106,12 @@ export default (injectedStore: any) => {
         { name: blog_name },
         { $inc: { visits: 1 } },
       );
-      if (response.nModified > 0) {
-        return { error: false };
+      if (Object.values(response)[1] === 'MongoError' || response.nModified === 0) {
+        return { error: true };
       }
-      return response;
-    } catch (error) {
-      return error;
+      return 'Visit added';
+    } catch {
+      return new Error('Error adding visit');
     }
   }
 

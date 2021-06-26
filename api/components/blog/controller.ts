@@ -115,6 +115,23 @@ export default (injectedStore: any) => {
     }
   }
 
+  async function addLike(blogName: string) {
+    try {
+      const response = await store.updateOne(
+        BlogSchema,
+        { name: blogName },
+        { $inc: { likes: 1 } },
+      );
+
+      if (Object.values(response)[1] === 'MongoError' || response.nModified === 0) {
+        return { error: true };
+      }
+      return 'Like added';
+    } catch (error) {
+      return new Error('Error adding like');
+    }
+  }
+
   return {
     createBlog,
     getBlog,
@@ -123,5 +140,6 @@ export default (injectedStore: any) => {
     getAllBlogsInfo,
     findLastBlogs,
     add_visit,
+    addLike,
   };
 };

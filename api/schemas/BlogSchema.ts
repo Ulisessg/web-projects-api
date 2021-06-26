@@ -36,6 +36,10 @@ const CreateBlogSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  likes: {
+    type: Number,
+    required: true,
+  },
 });
 
 export default mongoose.model('blogs', CreateBlogSchema);

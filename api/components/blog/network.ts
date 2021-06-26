@@ -176,4 +176,21 @@ router.post('/add-visit', async (req, res) => {
     });
 });
 
+router.post('/add-like', async (req, res) => {
+  const { blogName } = req.body;
+
+  controller
+    .addLike(blogName)
+    .then((response: any) => {
+      if (response.error === true) {
+        error(req, res, 500, 'Internal server error');
+      } else {
+        success(req, res, 201, response);
+      }
+    })
+    .catch(() => {
+      error(req, res, 500, 'Internal server error');
+    });
+});
+
 export default router;

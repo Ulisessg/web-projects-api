@@ -9,7 +9,7 @@ const cors = require('cors');
 const { NODE_ENV, EMAIL, PASSWORD } = process.env;
 
 const corsOptions = {
-  origin: NODE_ENV === 'production' ? 'https://ulisessg.com/' : '*',
+  origin: NODE_ENV === 'production' ? ['https://ulisessg.com', 'https://web-projects-50e7e.web.app'] : '*',
   methods: 'POST',
 };
 

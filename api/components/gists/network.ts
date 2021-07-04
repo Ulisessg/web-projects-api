@@ -4,16 +4,10 @@ import controller from './index';
 import { error, success } from '../../../network/responses';
 
 const router = express.Router();
-const cors = require('cors');
 
 const { NODE_ENV, EMAIL, PASSWORD } = process.env;
 
-const corsOptions = {
-  origin: NODE_ENV === 'production' ? ['https://ulisessg.com', 'https://web-projects-50e7e.web.app'] : '*',
-  methods: 'POST',
-};
-
-router.post('/add-gist', cors(corsOptions), async (req, res) => {
+router.post('/add-gist', async (req, res) => {
   if (req.body.email !== EMAIL || req.body.password !== PASSWORD) {
     res.status(500).json({
       error: true,

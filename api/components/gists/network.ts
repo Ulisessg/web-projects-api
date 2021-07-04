@@ -1,6 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import express from 'express';
 import controller from './index';
+import { error, success } from '../../../network/responses';
 
 const router = express.Router();
 const cors = require('cors');
@@ -99,6 +100,23 @@ router.get('/', async (req, res) => {
       } else {
         res.status(500).json({ error: true, message: 'Error getting gists' });
       }
+    });
+});
+
+router.post('/add-like', async (req, res) => {
+  const { name } = req.body;
+
+  controller
+    .addLike(name)
+    .then((response: any) => {
+      if (response.error === true) {
+        error(req, res, 500, 'Internal server error');
+      } else {
+        success(req, res, 201, response);
+      }
+    })
+    .catch(() => {
+      error(req, res, 500, 'Internal server error');
     });
 });
 

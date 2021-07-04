@@ -25,6 +25,10 @@ const AddGistSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  likes: {
+    type: Number,
+    required: true,
+  },
 });
 
 export default mongoose.model('gists', AddGistSchema);

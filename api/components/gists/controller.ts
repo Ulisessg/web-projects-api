@@ -45,5 +45,22 @@ export default function gistsController(injectedStore: any) {
     }
   }
 
-  return { addGist, getGists };
+  async function addLike(gistName: string) {
+    try {
+      const response = await store.updateOne(
+        GistsSchema,
+        { name: gistName },
+        { $inc: { likes: 1 } },
+      );
+
+      if (Object.values(response)[1] === 'MongoError' || response.nModified === 0) {
+        return { error: true };
+      }
+      return 'Like added';
+    } catch (error) {
+      return new Error('Error adding like');
+    }
+  }
+
+  return { addGist, getGists, addLike };
 }
